@@ -1,29 +1,37 @@
 class Solution {
     public boolean validPath(int n, int[][] edges, int source, int destination) {
-        Map<Integer, List<Integer>> graph = new HashMap<>();
-        for (int[] edge : edges) {
-            int u = edge[0];
-            int v = edge[1];
-            graph.computeIfAbsent(u, k -> new ArrayList<>()).add(v);
-            graph.computeIfAbsent(v, k -> new ArrayList<>()).add(u);
+        if (source == destination) return true;
+        List<List<Integer>> list = new  ArrayList<>();
+        for(int i=0;i<n;i++){
+            list.add(new ArrayList<>());
         }
-        
-        Set<Integer> visited = new HashSet<>();
-        return dfs(source, destination, graph, visited);
-    }
-    
-    private boolean dfs(int node, int destination, Map<Integer, List<Integer>> graph, Set<Integer> visited) {
-        if (node == destination) {
-            return true;
+        for(int[] side : edges){
+            list.get(side[0]).add(side[1]);
+            list.get(side[1]).add(side[0]);
         }
-        visited.add(node);
-        for (int neighbor : graph.getOrDefault(node, new ArrayList<>())) {
-            if (!visited.contains(neighbor)) {
-                if (dfs(neighbor, destination, graph, visited)) {
-                    return true;
+
+        int[] vis = new int[n];
+        for(int i=0;i<n;i++){
+            vis[i]=0;
+        }
+        Queue<Integer> q = new LinkedList<>();
+        q.add(source);
+        vis[source]=1;
+        while(!q.isEmpty()){
+            int node = q.poll();
+            vis[node]=1;
+            for(int i: list.get(node)){
+                 if(i==destination){
+                        return true;
+                    }
+                if(vis[i]==0){
+                    vis[i]=1;
+                    q.add(i);
+                   
                 }
             }
         }
         return false;
+        
     }
 }
