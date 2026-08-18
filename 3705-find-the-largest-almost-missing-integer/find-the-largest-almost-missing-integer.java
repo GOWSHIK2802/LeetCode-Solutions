@@ -1,25 +1,53 @@
 class Solution {
     public int largestInteger(int[] nums, int k) {
         int n = nums.length;
-        Map<Integer, Integer> freq = new HashMap<>();
-        for (int x : nums) freq.merge(x, 1, Integer::sum);
+
+        HashMap<Integer, Integer> mp = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            mp.put(nums[i], mp.getOrDefault(nums[i], 0) + 1);
+        }
+
+        if (k == nums.length) {
+            int maxValue = Integer.MIN_VALUE;
+
+            for (int i = 0; i < n; i++) {
+                maxValue = Math.max(maxValue, nums[i]);
+            }
+
+            return maxValue;
+        }
 
         if (k == 1) {
-            int ans = -1;
-            for (Map.Entry<Integer, Integer> e : freq.entrySet())
-                if (e.getValue() == 1) ans = Math.max(ans, e.getKey());
-            return ans;
+            int maxValue = -1;
+
+            for (int i = 0; i < n; i++) {
+                if (mp.get(nums[i]) == 1 && nums[i] > maxValue) {
+                    maxValue = nums[i];
+                }
+            }
+
+            return maxValue;
         }
 
-        if (k == n) {
-            int ans = nums[0];
-            for (int x : nums) ans = Math.max(ans, x);
-            return ans;
+        n = n - 1;
+
+        if (nums[0] == nums[n]) {
+            return -1;
         }
 
-        int ans = -1;
-        if (freq.get(nums[0]) == 1) ans = Math.max(ans, nums[0]);
-        if (freq.get(nums[n - 1]) == 1) ans = Math.max(ans, nums[n - 1]);
-        return ans;
+        if (mp.get(nums[0]) == 1 && mp.get(nums[n]) == 1) {
+            return Math.max(nums[0], nums[n]);
+        }
+
+        if (mp.get(nums[0]) == 1 && mp.get(nums[n]) > 1) {
+            return nums[0];
+        }
+
+        if (mp.get(nums[n]) == 1 && mp.get(nums[0]) > 1) {
+            return nums[n];
+        }
+
+        return -1;
     }
 }
