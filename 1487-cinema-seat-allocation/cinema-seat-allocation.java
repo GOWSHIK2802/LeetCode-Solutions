@@ -16,7 +16,7 @@ class Solution {
 
             prev = reservedSeats[r][0];
 
-            
+
             while (r < sz && reservedSeats[l][0] == reservedSeats[r][0]) {
                 isReserved[reservedSeats[r][1]] = true;
                 r++;
@@ -27,7 +27,7 @@ class Solution {
             boolean fourToSeven = check(isReserved, 4, 7);
             boolean sixToNine = check(isReserved, 6, 9);
 
-        
+            
             if (twoToFive && sixToNine) {
                 ans += 2;
             }
