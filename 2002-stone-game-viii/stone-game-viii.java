@@ -3,7 +3,7 @@ class Solution {
         int n = stones.length;
 
         int[] prefix = stones.clone();
-
+        
         for (int i = 1; i < n; i++) {
             prefix[i] += prefix[i - 1];
         }
