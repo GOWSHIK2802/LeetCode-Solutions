@@ -15,7 +15,7 @@ class Solution {
                 if (s.charAt(j) == '1')
                     oneCnt++;
 
-                // More than k ones can never become valid again
+                
                 if (oneCnt > k)
                     break;
 
