@@ -14,7 +14,7 @@ class Solution {
             return false;
         }
 
-        
+        // 0: unknown, 1: false, 2: true
         memo = new byte[m][n][length + 1];
         return dfs(0, 0, 0);
     }
