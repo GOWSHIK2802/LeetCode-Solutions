@@ -3,7 +3,7 @@ class Solution {
 
     public int numOfWays(int[] nums) {
         int n = nums.length;
-        int[] born = new int[n + 2];  
+            int[] born = new int[n + 2];  
         Arrays.fill(born, -1);
         for (int i = 0; i < n; i++) born[nums[i]] = i;
 
