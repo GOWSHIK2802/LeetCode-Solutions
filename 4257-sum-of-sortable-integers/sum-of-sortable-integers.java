@@ -13,7 +13,7 @@ class Solution {
 
         BiPredicate<Integer, Integer> rotatable = (l, r) ->  
             desc[r] - desc[l] + (nums[r] > nums[l] ? 1 : 0) <= 1;
-        IntPredicate sortable = k ->
+        IntPredicate sortable = k ->  
             IntStream.iterate(0, l -> l < n, l -> l + k).allMatch(l -> cut[l] && rotatable.test(l, l + k - 1));
 
         IntStream divisors = IntStream.rangeClosed(1, n).filter(k -> n % k == 0);
