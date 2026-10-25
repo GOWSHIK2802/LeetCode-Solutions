@@ -6,7 +6,7 @@ class Solution {
         if (i < 0 || i >= m || j < 0 || j >= n) return false;  
         if (grid[i][j] == 1) return true;  
         grid[i][j] = 1;  
-        return closed(i + 1, j) & closed(i - 1, j) & closed(i, j + 1) & closed(i, j - 1);  
+        return closed(i + 1, j) & closed(i - 1, j) & closed(i, j + 1) & closed(i, j - 1);
     }
 
     public int closedIsland(int[][] grid) {
