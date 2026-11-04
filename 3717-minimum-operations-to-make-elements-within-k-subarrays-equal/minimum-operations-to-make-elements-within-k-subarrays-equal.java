@@ -3,7 +3,7 @@ class Window {
     private final int x, odd;
     private final Comparator<Integer> order;  
     private final TreeSet<Integer> s;         
-    private int mid;                          
+    private int mid;
     private long low, total;
 
     Window(int[] nums, int x) {
@@ -29,7 +29,7 @@ class Window {
     long slide(int in) {
         int out = in - x;
         s.add(in);
-        if (order.compare(in, mid) < 0) {
+        if (order.compare(in, mid) < 0) {  
             mid = s.lower(mid);
             low += nums[in] - nums[mid];
         }
